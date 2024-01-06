@@ -16,7 +16,8 @@ class CarModel(models.Model):
 class Car(models.Model):
     year = models.IntegerField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    model = models.ForeignKey(CarModel, on_delete=models.SET_NULL)
+    model = models.ForeignKey(CarModel, on_delete=models.SET_NULL, null=True)
+    image = models.ImageField(upload_to='car_images/', null=True, blank=True)
 
 
 class Blog(models.Model):
