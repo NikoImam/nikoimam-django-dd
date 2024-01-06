@@ -5,3 +5,4 @@
 - `python -n venv venv` - создание виртуального окружения
 - `.\venv\Scripts\activate` - вход в виртуальное окружение
 - `pip install -r requirements.txt` - установка зависимостей
+- `python manage.py runserver` - запуск сервера
