@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  postgres:
+    image: 15-alpine
+    ports:
+      5004:5004
+    environment:
+      POSTGRES_DB: django
+      POSTGRES_USER: postgres
+      POSTGRESS_PASSWORD: admin
+    volumes:
+      - "db:/var/lib/postgresql/data"
+volumes:
+  db:
