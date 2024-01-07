@@ -23,6 +23,7 @@ class RegistrationForm(forms.ModelForm):
         model = User
         fields = {"first_name", "last_name", "email", "username", "password", "repeat_password"}
 
+
 class AuthForm(forms.Form):
     username = forms.CharField(label='Логин')
     password = forms.CharField(widget=forms.PasswordInput())
