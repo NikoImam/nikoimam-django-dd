@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from web.forms import RegistrationForm, AuthForm
-from django.contrib.auth import get_user_model, authenticate, login, logout
+from django.contrib.auth import *
 
 User = get_user_model()
 
@@ -52,5 +52,13 @@ def logout_view(request):
     return redirect('main')
 
 
-def myblog_view(request):
-    return
+def blog_view(request):
+    return render(request, 'web/blog.html')
+
+
+def post_view(request):
+    return render(request, 'web/post.html')
+
+
+def create_post_view(request):
+    return render(request, 'web/createPost.html')
