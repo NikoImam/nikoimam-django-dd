@@ -26,4 +26,4 @@ class RegistrationForm(forms.ModelForm):
 
 class AuthForm(forms.Form):
     username = forms.CharField(label='Логин')
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput(), label="Пароль")
