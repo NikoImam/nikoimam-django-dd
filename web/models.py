@@ -8,6 +8,9 @@ class CarModel(models.Model):
     model = models.CharField(max_length=256)
     brand = models.CharField(max_length=256)
 
+    def __str__(self):
+        return f'{self.brand} {self.model}'
+
 
 class Car(models.Model):
     year = models.IntegerField()

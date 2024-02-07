@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from web.models import *
 
 User = get_user_model()
 
@@ -26,4 +27,26 @@ class RegistrationForm(forms.ModelForm):
 
 class AuthForm(forms.Form):
     username = forms.CharField(label='Логин')
-    password = forms.CharField(widget=forms.PasswordInput(), label="Пароль")
+    password = forms.CharField(widget=forms.PasswordInput(), label='Пароль')
+
+
+class PostForm(forms.ModelForm):
+    title = forms.CharField(label='Заголовок')
+    text = forms.CharField(widget=forms.Textarea(), label='Содержимое')
+
+    class Meta:
+        model = Post
+        fields = ('title', 'text')
+
+
+class CarForm(forms.ModelForm):
+    year = forms.IntegerField(label='Год производства')
+
+    def save(self, commit=True):
+        self.instance.owner = self.initial['user']
+        return super().save(commit)
+
+    class Meta:
+        model = Car
+        fields = ('model', 'year', 'image')
+

@@ -1,9 +1,9 @@
 {% extends 'web/base.html' %}
 {% block content %}
-    <h2>Создание записи в блог</h2>
+    <h2>Добавить авто</h2>
     <form>
         {% csrf_token %}
         {{ form.as_p }}
-        <button>Создать</button>
+        <button>Добавить</button>
     </form>
 {% endblock %}

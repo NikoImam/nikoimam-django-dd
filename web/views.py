@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from web.forms import RegistrationForm, AuthForm
+from web.forms import *
 from django.contrib.auth import *
 
 User = get_user_model()
@@ -61,4 +60,27 @@ def post_view(request):
 
 
 def create_post_view(request):
-    return render(request, 'web/createPost.html')
+    form = PostForm()
+    return render(request, 'web/createPost.html', {
+        'form': form
+    })
+
+
+def cars_view(request):
+    return render(request, 'web/cars.html')
+
+
+def car_view(request):
+    return render(request, 'web/car.html')
+
+
+def add_car_view(request):
+    form = CarForm()
+    if request.method == 'POST':
+        form = CarForm(data=request.POST, files=request.FILES, initial={'user': request.user})
+        if form.is_valid():
+            form.save()
+            return redirect('cars')
+    return render(request, 'web/addCar.html', {
+        'form': form
+    })
