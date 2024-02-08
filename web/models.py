@@ -13,14 +13,19 @@ class CarModel(models.Model):
 
 
 class Car(models.Model):
-    year = models.IntegerField()
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    model = models.ForeignKey(CarModel, on_delete=models.SET_NULL, null=True)
-    image = models.ImageField(upload_to='car_images/', null=True, blank=True)
+    year = models.IntegerField(verbose_name='Год производства')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Владелец')
+    model = models.ForeignKey(CarModel, on_delete=models.SET_NULL, null=True, verbose_name='Марка, модель')
+    image = models.ImageField(upload_to='car_images/', null=True, blank=True, verbose_name='Фото')
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=256)
-    text = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    car = models.ForeignKey(Car, on_delete=models.CASCADE)
+    title = models.CharField(max_length=256, verbose_name='Заголовок')
+    text = models.TextField(verbose_name='Содержимое')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, verbose_name='Автомобиль')
+
+
+class Respect(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь', unique=True)
+

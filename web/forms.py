@@ -34,6 +34,11 @@ class PostForm(forms.ModelForm):
     title = forms.CharField(label='Заголовок')
     text = forms.CharField(widget=forms.Textarea(), label='Содержимое')
 
+    def save(self, commit=True):
+        self.instance.user = self.initial['user']
+        self.instance.car = self.initial['car']
+        return super().save(commit)
+
     class Meta:
         model = Post
         fields = ('title', 'text')

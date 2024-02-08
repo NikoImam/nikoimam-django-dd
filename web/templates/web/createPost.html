@@ -1,9 +1,15 @@
 {% extends 'web/base.html' %}
 {% block content %}
     <h2>Создание записи в блог</h2>
-    <form>
+    <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
+        <select name="car" required id="id_car">
+            <option value="" selected>Авто</option>
+            {% for car in cars %}
+                <option value="{{ car.id }}">{{car.model}}</option>
+            {% endfor %}
+        </select>
         <button>Создать</button>
     </form>
 {% endblock %}

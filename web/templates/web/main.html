@@ -1,4 +1,13 @@
 {% extends 'web/base.html' %}
 {% block content %}
-    Привет, {{ user.username }}
+    {% if not user.is_anonymous %}
+        Привет, {{ user.username }}
+    {% endif %}
+    <ul>
+        {% for post in posts %}
+            <li>
+                <a href="{% url 'post' post.id %}">{{ post.title }} | {{ post.user.username }} | {{ post.car.model }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
