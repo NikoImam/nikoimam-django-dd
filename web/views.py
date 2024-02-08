@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import *
 from web.forms import *
 from django.contrib.auth import *
 
@@ -58,7 +59,7 @@ def blog_view(request):
 def post_view(request):
     return render(request, 'web/post.html')
 
-
+@login_required
 def create_post_view(request):
     form = PostForm()
     return render(request, 'web/createPost.html', {
@@ -67,13 +68,20 @@ def create_post_view(request):
 
 
 def cars_view(request):
-    return render(request, 'web/cars.html')
+    cars = Car.objects.filter(owner=request.user)
+    return render(request, 'web/cars.html', {
+        'cars': cars
+    })
 
 
-def car_view(request):
-    return render(request, 'web/car.html')
+def car_view(request, id=None):
+    car = Car.objects.get(id=id)
+    is_owner = car.owner == request.user
+    return render(request, 'web/car.html', {
+        'car': car, 'is_owner': is_owner
+    })
 
-
+@login_required
 def add_car_view(request):
     form = CarForm()
     if request.method == 'POST':
@@ -84,3 +92,22 @@ def add_car_view(request):
     return render(request, 'web/addCar.html', {
         'form': form
     })
+
+@login_required
+def edit_car_view(request, id=None):
+    car = Car.objects.get(id=id)
+    form = CarForm(instance=car)
+    if request.method == 'POST' and car.owner == request.user:
+        form = CarForm(data=request.POST, files=request.FILES, instance=car, initial={'user': request.user})
+        if form.is_valid():
+            form.save()
+            return redirect('cars')
+    return render(request, 'web/editCar.html', {
+        'form': form
+    })
+
+@login_required
+def delete_car_view(request, id=None):
+    car = get_object_or_404(Car, owner=request.user, id=id)
+    car.delete()
+    return redirect('cars')

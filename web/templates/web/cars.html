@@ -2,5 +2,11 @@
 {% block content %}
     <h2>Мои автомобили</h2>
     <a href="{% url 'add_car' %}">Добавить автомобиль</a>
-    <p>List</p>
+    <ul>
+        {% for car in cars %}
+        <li>
+            <a href="{% url 'car' car.id %}">{{ car.model }}</a>
+        </li>
+        {% endfor %}
+    </ul>
 {% endblock %}

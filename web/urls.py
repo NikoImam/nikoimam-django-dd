@@ -13,5 +13,7 @@ urlpatterns = [
     path('car/<int:id>', car_view, name='car'),
     path('blog/', blog_view, name='blog'),
     path('post/<int:id>', post_view, name='post'),
-    path('post/add', create_post_view, name='create_post')
+    path('post/add', create_post_view, name='create_post'),
+    path('car/<int:id>/edit', edit_car_view, name='edit_car'),
+    path('car/<int:id>/delete', delete_car_view, name='delete_car')
 ]

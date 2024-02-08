@@ -1,9 +1,11 @@
 {% extends 'web/base.html' %}
 {% block content %}
-    <h2>Добавить авто</h2>
-    <form>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button>Добавить</button>
-    </form>
+<h3>{{ car.model }}</h3>
+<p>{{ car.year }}</p>
+<img src="{{car.image.url}}" style="height:200px">
+<br>
+{% if is_owner %}
+<a href="{% url 'edit_car' car.id %}">Редактировать</a>
+<a href="{% url 'delete_car' car.id %}">Удалить</a>
+{% endif %}
 {% endblock %}
