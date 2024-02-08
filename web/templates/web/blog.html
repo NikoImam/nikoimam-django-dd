@@ -1,4 +1,12 @@
 {% extends 'web/base.html' %}
 {% block content %}
-    Привет, {{ user.username }}
+    <h2>Мой блог</h2>
+    <a href="{% url 'create_post' %}">Добавить пост</a>
+    <ul>
+        {% for post in posts %}
+        <li>
+            <a href="{% url 'post' post.id %}">{{ post.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
 {% endblock %}

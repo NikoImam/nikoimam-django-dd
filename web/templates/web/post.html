@@ -1,4 +1,11 @@
 {% extends 'web/base.html' %}
 {% block content %}
-    Привет, {{ user.username }}
+<h3>{{ post.title }}</h3>
+<p>{{ post.text }}</p>
+<p>{{ post.car.model }}</p>
+<br>
+{% if is_author %}
+<a href="{% url 'edit_post' post.id %}">Редактировать</a>
+<a href="{% url 'delete_post' post.id %}">Удалить</a>
+{% endif %}
 {% endblock %}

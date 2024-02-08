@@ -1,0 +1,17 @@
+{% extends 'web/base.html' %}
+{% block content %}
+    <h2>Редактировать пост</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <select name="car" required id="id_car">
+            <option value="{{ selected_car.id }}" selected>{{ selected_car.model }}</option>
+            {% for car in cars %}
+                {% if car.id != selected_car.id %}
+                    <option value="{{ car.id }}">{{car.model}}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <button>Обновить</button>
+    </form>
+{% endblock %}
