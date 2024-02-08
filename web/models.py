@@ -24,8 +24,4 @@ class Post(models.Model):
     text = models.TextField(verbose_name='Содержимое')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
     car = models.ForeignKey(Car, on_delete=models.CASCADE, verbose_name='Автомобиль')
-
-
-class Respect(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь', unique=True)
-
+    visits = models.IntegerField(default=0)

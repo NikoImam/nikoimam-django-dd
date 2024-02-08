@@ -66,6 +66,9 @@ def blog_view(request):
 def post_view(request, id=None):
     post = get_object_or_404(Post, id=id)
     is_author = post.user == request.user
+    if request.user != post.user:
+        post.visits += 1
+        post.save()
     return render(request, 'web/post.html', {
         'post': post, 'is_author': is_author
     })
@@ -157,3 +160,11 @@ def delete_car_view(request, id=None):
     car = get_object_or_404(Car, owner=request.user, id=id)
     car.delete()
     return redirect('cars')
+
+
+def analytics_view(request):
+    users_count = User.objects.count()
+    posts_count = Post.objects.count()
+    return render(request, 'web/analytics.html', {
+        'users_count': users_count, 'posts_count': posts_count
+    })

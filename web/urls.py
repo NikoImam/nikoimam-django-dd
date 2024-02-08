@@ -17,5 +17,6 @@ urlpatterns = [
     path('car/add', add_car_view, name='add_car'),
     path('car/<int:id>', car_view, name='car'),
     path('car/<int:id>/edit', edit_car_view, name='edit_car'),
-    path('car/<int:id>/delete', delete_car_view, name='delete_car')
+    path('car/<int:id>/delete', delete_car_view, name='delete_car'),
+    path('analytics', analytics_view, name='analytics')
 ]

@@ -7,5 +7,7 @@
 {% if is_author %}
 <a href="{% url 'edit_post' post.id %}">Редактировать</a>
 <a href="{% url 'delete_post' post.id %}">Удалить</a>
+<br>
+<b>Кол-во просмотров:</b> {{ post.visits }} <!-- Статистика по просмотрам -->
 {% endif %}
 {% endblock %}
